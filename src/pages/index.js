@@ -145,8 +145,7 @@ const IndexPage = () => {
       <Seo title="Home" />
       {!audioContextStarted && (
         <IndexPage.AudioContextButton
-          isSelected={isMuted}
-          onClick={onStartAudioContext}
+          onMouseDown={onStartAudioContext}
         >
           Activate Audio Context
         </IndexPage.AudioContextButton>
@@ -155,9 +154,6 @@ const IndexPage = () => {
   );
 }
 
-IndexPage.AudioContextButton = styled.button`
-  width: auto;
-  height: auto;
-`;
+IndexPage.AudioContextButton = styled(Button)``;
 
 export default IndexPage;
