@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import styled from "styled-components";
 import { io } from "socket.io-client";
+import { Button } from '@bomanimc/system';
 
 import Layout from "../components/layout";
 import Seo from "../components/seo";
@@ -38,6 +39,6 @@ ControllerPage.ColorBackground = styled.div`
   padding: 1rem;
 `;
 
-ControllerPage.Button = styled.button``;
+ControllerPage.Button = styled(Button)``;
 
 export default ControllerPage;

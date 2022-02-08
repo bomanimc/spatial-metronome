@@ -5,6 +5,7 @@
   "version": "0.1.0",
   "author": "Kyle Mathews <mathews.kyle@gmail.com>",
   "dependencies": {
+    "@bomanimc/system": "^0.1.1",
     "dotenv": "^16.0.0",
     "gatsby": "^4.6.2",
     "gatsby-plugin-gatsby-cloud": "^4.6.0",
@@ -18,10 +19,13 @@
     "gatsby-transformer-sharp": "^4.6.0",
     "prop-types": "^15.8.0",
     "react": "^17.0.1",
+    "react-device-detect": "^2.1.2",
     "react-dom": "^17.0.1",
     "react-helmet": "^6.1.0",
     "socket.io-client": "^4.4.1",
-    "styled-components": "^5.3.3"
+    "styled-components": "^5.3.3",
+    "tone": "^14.7.77",
+    "unmute-ios-audio": "^3.3.0"
   },
   "devDependencies": {
     "prettier": "^2.5.1"
