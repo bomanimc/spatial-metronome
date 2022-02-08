@@ -17,7 +17,7 @@ function getRandomIntInclusive(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min); //The maximum is inclusive and the minimum is inclusive
 }
 
-const randomInt = getRandomIntInclusive(40, 200);
+const randomBPM = getRandomIntInclusive(40, 200);
 
 const IndexPage = () => {
   const baseChannel = useRef(null);
@@ -97,7 +97,7 @@ const IndexPage = () => {
       }
     }).connect(baseChannel.current);
 
-		Tone.Transport.bpm.value = randomInt;
+		Tone.Transport.bpm.value = randomBPM;
 
     // // callback for Tone.Loop
     // function play_note(time) {
@@ -157,9 +157,18 @@ const IndexPage = () => {
           Activate Audio Context
         </IndexPage.AudioContextButton>
       )}
+      <IndexPage.BPMDetails>{`${randomBPM}`}</IndexPage.BPMDetails>
     </Layout>
   );
 }
+
+IndexPage.BPMDetails = styled.div`
+  color: white;
+  position: fixed;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+`;
 
 IndexPage.AudioContextButton = styled(Button)``;
 
