@@ -29,7 +29,7 @@ const IndexPage = () => {
     console.log("Connected!");
   });
 
-  socket.once("newFrame", (data) => {
+  socket.on("isSilent", (data) => {
     const { isSilent } = data;
 
     console.log('isSilent', isSilent);
