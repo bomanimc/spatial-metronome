@@ -1,31 +1,56 @@
-import * as React from "react"
-import { Link } from "gatsby"
-import { StaticImage } from "gatsby-plugin-image"
+import React, { useState, useEffect, useCallback } from "react";
+import styled from "styled-components";
+import { io } from "socket.io-client";
 
-import Layout from "../components/layout"
-import Seo from "../components/seo"
+import Layout from "../components/layout";
+import Seo from "../components/seo";
 
-const IndexPage = () => (
-  <Layout>
-    <Seo title="Home" />
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <StaticImage
-      src="../images/gatsby-astronaut.png"
-      width={300}
-      quality={95}
-      formats={["auto", "webp", "avif"]}
-      alt="A Gatsby astronaut"
-      style={{ marginBottom: `1.45rem` }}
-    />
-    <p>
-      <Link to="/page-2/">Go to page 2</Link> <br />
-      <Link to="/using-typescript/">Go to "Using TypeScript"</Link> <br />
-      <Link to="/using-ssr">Go to "Using SSR"</Link> <br />
-      <Link to="/using-dsg">Go to "Using DSG"</Link>
-    </p>
-  </Layout>
-)
+const socket = io(process.env.GATSBY_SOCKET_SERVER_URL);
 
-export default IndexPage
+const IndexPage = () => {
+  const [color, setColor] = useState(undefined);
+
+  const onDisconnect = useCallback(() => () => {
+    socket.off('newFrame');
+    socket.disconnect();
+  });
+
+  useEffect(() => {
+    console.log("Use effect", socket);
+    window.addEventListener('beforeunload', onDisconnect);
+
+    return () => {
+      onDisconnect();
+      window.removeEventListener('beforeunload', onDisconnect);
+    };
+  }, []);
+
+  socket.once("connect", () => {
+    console.log("Connected!");
+  });
+
+  socket.once("newFrame", (data) => {
+    const { isSilent } = data;
+
+    console.log('isSilent', isSilent);
+  });
+
+  return (
+    <Layout>
+      <Seo title="Home" />
+      <IndexPage.ColorBackground bgColor={color} />
+    </Layout>
+  );
+}
+
+IndexPage.ColorBackground = styled.div`
+  flex: 1;
+  background: ${p => p.bgColor};
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 1rem;
+`;
+
+export default IndexPage;
