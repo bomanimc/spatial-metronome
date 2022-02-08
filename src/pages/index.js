@@ -6,11 +6,18 @@ import unmuteAudio from 'unmute-ios-audio';
 import { isMobile } from 'react-device-detect';
 import { Button } from '@bomanimc/system';
 
-
 import Layout from "../components/layout";
 import Seo from "../components/seo";
 
 const socket = io(process.env.GATSBY_SOCKET_SERVER_URL);
+
+function getRandomIntInclusive(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1) + min); //The maximum is inclusive and the minimum is inclusive
+}
+
+const randomInt = getRandomIntInclusive(40, 200);
 
 const IndexPage = () => {
   const baseChannel = useRef(null);
@@ -90,7 +97,7 @@ const IndexPage = () => {
       }
     }).connect(baseChannel.current);
 
-		Tone.Transport.bpm.value = 100;
+		Tone.Transport.bpm.value = randomInt;
 
     // // callback for Tone.Loop
     // function play_note(time) {
