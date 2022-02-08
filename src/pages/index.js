@@ -91,6 +91,34 @@ const IndexPage = () => {
     }).connect(baseChannel.current);
 
 		Tone.Transport.bpm.value = 100;
+
+    // // callback for Tone.Loop
+    // function play_note(time) {
+    //   sampler.triggerAttackRelease("A1", "8n", time);  // 8n = duration of an 8th note
+    // }
+
+    // // init the loop (to be called back every quarter note)
+    // const loop = new Tone.Loop( play_note, "4n" );
+    // loop.start(0);
+
+    // //this will start the player on every quarter note
+    // Tone.Transport.setInterval(function(time){
+    //   player.start(time);
+    //   console.log("PLAY NOTE");
+    // }, "4n");
+    // //start the Transport for the events to start
+    // Tone.Transport.start();
+
+		// Tone.Buffer.onload = function() {
+    //   console.log("LOADED");
+		// 	//this will start the player on every quarter note
+		// 	Tone.Transport.setInterval(function(time){
+		// 	  player.start(time);
+    //     console.log("PLAY NOTE");
+		// 	}, "4n");
+		// 	//start the Transport for the events to start
+		// 	Tone.Transport.start();
+		// };
     
     oscillators.map((oscillator) => oscillator.dispose());
   
