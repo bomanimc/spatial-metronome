@@ -55,7 +55,7 @@ const IndexPage = () => {
 
   const onStartAudioContext = () => {
     console.log("START AUDIO");
-    // Tone.context.resume();
+    Tone.context.resume();
     Tone.Transport.start();
     setAudioContextStarted(true);
   };
