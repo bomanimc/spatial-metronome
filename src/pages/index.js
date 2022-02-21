@@ -119,7 +119,7 @@ const IndexPage = () => {
           <IndexPage.AudioContextButton
             onMouseDown={onStartAudioContext}
           >
-            Activate Audio Context
+            Touch to Start
           </IndexPage.AudioContextButton>
         )
       }
