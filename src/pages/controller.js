@@ -50,6 +50,8 @@ ControllerPage.StateDetail = styled.div`
   transform: translateX(-50%);
 `;
 
-ControllerPage.Button = styled(Button)``;
+ControllerPage.Button = styled(Button)`
+  font-family: inherit;
+`;
 
 export default ControllerPage;

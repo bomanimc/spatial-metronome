@@ -18,10 +18,23 @@ function getRandomIntInclusive(min, max) {
 
 const randomBPM = getRandomIntInclusive(40, 200);
 
+const BACKGROUND_COLOR_OPTIONS = [
+  `#ff3838`,
+  `#ff9f1a`,
+  `#fff200`,
+  `#32ff7e`,
+  `#7efff5`,
+  `#18dcff`,
+  `#cd84f1`,
+]
+
 const IndexPage = () => {
   const baseChannel = useRef(null);
   const [isMuted, setIsMuted] = useState(false);
   const [audioContextStarted, setAudioContextStarted] = useState(false);
+  // const [colorIndex, setColorIndex] = useState(0);
+  const bgColorRef = useRef();
+  const colorIndexRef = useRef(0);
 
   socket.once("connect", () => {
     console.log("Connected!");
@@ -68,6 +81,8 @@ const IndexPage = () => {
 
     // init the loop (to be called back every quarter note)
     const loop = new Tone.Loop((time) => {
+      colorIndexRef.current = (colorIndexRef.current + 1) % BACKGROUND_COLOR_OPTIONS.length;
+      bgColorRef.current.style.background = BACKGROUND_COLOR_OPTIONS[colorIndexRef.current];
       sampler.triggerAttackRelease("A1", "8n", time);  // 8n = duration of an 8th note
     }, "4n" );
 
@@ -86,7 +101,7 @@ const IndexPage = () => {
     baseChannel.current.toDestination();
 
     return () => {
-      sampler.stop().dispose();
+      sampler.dispose();
 
       if (baseChannel.current) {
         baseChannel.current.dispose();
@@ -97,26 +112,39 @@ const IndexPage = () => {
   return (
     <Layout>
       <Seo title="Home" />
-      {!audioContextStarted && (
-        <IndexPage.AudioContextButton
-          onMouseDown={onStartAudioContext}
-        >
-          Activate Audio Context
-        </IndexPage.AudioContextButton>
-      )}
-      <IndexPage.BPMDetails>{`${randomBPM}`}</IndexPage.BPMDetails>
+      <IndexPage.ColorBackground ref={bgColorRef}>
+      {audioContextStarted ? 
+        <IndexPage.BPMDetails>{`${randomBPM}`}</IndexPage.BPMDetails>
+        : (
+          <IndexPage.AudioContextButton
+            onMouseDown={onStartAudioContext}
+          >
+            Activate Audio Context
+          </IndexPage.AudioContextButton>
+        )
+      }
+      </IndexPage.ColorBackground>
     </Layout>
   );
 }
 
 IndexPage.BPMDetails = styled.div`
   color: white;
-  position: fixed;
-  bottom: 1rem;
-  left: 50%;
-  transform: translateX(-50%);
+  font-size: 8rem;
+  mix-blend-mode: exclusion;
 `;
 
-IndexPage.AudioContextButton = styled(Button)``;
+IndexPage.ColorBackground = styled.div`
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #000;
+`;
+
+IndexPage.AudioContextButton = styled(Button)`
+  width: 50%;
+  border-radius: 1rem;
+`;
 
 export default IndexPage;

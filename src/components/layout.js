@@ -29,8 +29,7 @@
      padding: 0;
      border: 0;
      font-size: 100%;
-     font-family: "Brewery";
-     font: inherit;
+     font-family: Brewery, Larsseit, sans-serif;
      vertical-align: baseline;
    }
    article, aside, details, figcaption, figure, 
