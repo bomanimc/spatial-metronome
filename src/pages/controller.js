@@ -44,6 +44,7 @@ ControllerPage.Button = styled(Button)`
   font-size: 8vw;
   padding: 1rem;
   transition: color .25s ease-in-out, background .25s ease-in-out;
+  user-select: none;
 `;
 
 export default ControllerPage;
