@@ -5,7 +5,7 @@
   "version": "0.1.0",
   "author": "Kyle Mathews <mathews.kyle@gmail.com>",
   "dependencies": {
-    "@bomanimc/system": "^0.1.4",
+    "@bomanimc/system": "file:../system",
     "dotenv": "^16.0.0",
     "gatsby": "^4.6.2",
     "gatsby-plugin-gatsby-cloud": "^4.6.0",
