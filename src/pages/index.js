@@ -32,7 +32,6 @@ const IndexPage = () => {
   const baseChannel = useRef(null);
   const [isMuted, setIsMuted] = useState(false);
   const [audioContextStarted, setAudioContextStarted] = useState(false);
-  // const [colorIndex, setColorIndex] = useState(0);
   const bgColorRef = useRef();
   const colorIndexRef = useRef(0);
 
@@ -72,6 +71,9 @@ const IndexPage = () => {
   useEffect(() => {
     console.log("isMuted", isMuted);
     Tone.Destination.mute = isMuted;
+    if (isMuted) {
+      bgColorRef.current.style.background = '#fff';
+    }
   }, [isMuted]);
 
   useEffect(() => {
@@ -112,9 +114,9 @@ const IndexPage = () => {
   return (
     <Layout>
       <Seo title="Home" />
-      <IndexPage.ColorBackground ref={bgColorRef}>
+      <IndexPage.ColorBackground ref={bgColorRef} isMuted={isMuted}>
       {audioContextStarted ? 
-        <IndexPage.BPMDetails>{`${randomBPM}`}</IndexPage.BPMDetails>
+        <IndexPage.BPMDetails isMuted={isMuted}>{`${randomBPM}`}</IndexPage.BPMDetails>
         : (
           <IndexPage.AudioContextButton
             onMouseDown={onStartAudioContext}
@@ -129,9 +131,12 @@ const IndexPage = () => {
 }
 
 IndexPage.BPMDetails = styled.div`
+  color: ${p => p.isMuted ? 'black' : 'white'};
   color: white;
   font-size: 8rem;
   mix-blend-mode: exclusion;
+  filter: ${p => p.isMuted ? 'blur(.25rem)' : 'none'};
+  transition: ${p => p.isMuted ? 'filter .25s ease-in-out, color .25s ease-in-out' : 'none'};
 `;
 
 IndexPage.ColorBackground = styled.div`
@@ -140,6 +145,9 @@ IndexPage.ColorBackground = styled.div`
   justify-content: center;
   align-items: center;
   background: #000;
+  background: ${p => p.isMuted ? 'white !important' : 'black'};
+  filter: ${p => p.isMuted ? 'grayscale(1)' : 'none'};
+  transition: ${p => p.isMuted ? 'filter .25s ease-in-out, background .25s ease-in-out' : 'none'};
 `;
 
 IndexPage.AudioContextButton = styled(Button)`
