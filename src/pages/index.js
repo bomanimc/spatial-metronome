@@ -113,7 +113,7 @@ const IndexPage = () => {
 
   return (
     <Layout>
-      <Seo title="Home" />
+      <Seo />
       <IndexPage.ColorBackground ref={bgColorRef} isMuted={isMuted}>
       {audioContextStarted ? 
         <>

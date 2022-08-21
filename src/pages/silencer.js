@@ -33,7 +33,7 @@ const ControllerPage = () => {
 
   return (
     <Layout>
-      <Seo title="Home" />
+      <Seo title="Silencer | Whitened Noise" />
       <ControllerPage.Button id="screenButton" onPointerDown={onMouseDown} onPointerUp={onMouseUp}>{text}</ControllerPage.Button>
     </Layout>
   );
