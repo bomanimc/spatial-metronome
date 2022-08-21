@@ -7,7 +7,7 @@
   "dependencies": {
     "@bomanimc/system": "^0.1.4",
     "dotenv": "^16.0.0",
-    "gatsby": "^4.6.2",
+    "gatsby": "^4.21.1",
     "gatsby-plugin-gatsby-cloud": "^4.6.0",
     "gatsby-plugin-image": "^2.6.0",
     "gatsby-plugin-manifest": "^4.6.0",
@@ -24,7 +24,7 @@
     "react-helmet": "^6.1.0",
     "socket.io-client": "^4.4.1",
     "styled-components": "^5.3.3",
-    "tone": "^14.8.37",
+    "tone": "^14.8.29",
     "unmute-ios-audio": "^3.3.0"
   },
   "devDependencies": {

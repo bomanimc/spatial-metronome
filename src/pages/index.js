@@ -52,7 +52,6 @@ const IndexPage = () => {
   });
 
   const onStartAudioContext = () => {
-    console.log("START AUDIO");
     Tone.context.resume();
     Tone.Transport.start();
     setAudioContextStarted(true);
@@ -116,7 +115,10 @@ const IndexPage = () => {
       <Seo title="Home" />
       <IndexPage.ColorBackground ref={bgColorRef} isMuted={isMuted}>
       {audioContextStarted ? 
-        <IndexPage.BPMDetails isMuted={isMuted}>{`${randomBPM}`}</IndexPage.BPMDetails>
+        <>
+          <IndexPage.BPMDetails isMuted={isMuted}>{`${randomBPM}`}</IndexPage.BPMDetails>
+          <IndexPage.SilenceLink href="/silencer">Silence the sounds</IndexPage.SilenceLink>
+        </>
         : (
           <IndexPage.AudioContextButton
             onMouseDown={onStartAudioContext}
@@ -131,6 +133,10 @@ const IndexPage = () => {
 }
 
 IndexPage.BPMDetails = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
   color: ${p => p.isMuted ? 'black' : 'white'};
   color: white;
   font-size: 8rem;
@@ -143,6 +149,7 @@ IndexPage.ColorBackground = styled.div`
   flex: 1;
   display: flex;
   justify-content: center;
+  flex-direction: column;
   align-items: center;
   background: #000;
   background: ${p => p.isMuted ? 'white !important' : 'black'};
@@ -153,6 +160,18 @@ IndexPage.ColorBackground = styled.div`
 IndexPage.AudioContextButton = styled(Button)`
   width: 50%;
   border-radius: 1rem;
+`;
+
+IndexPage.SilenceLink = styled.a`
+  font-size: 1rem;
+  color: white;
+  mix-blend-mode: exclusion;
+  margin-bottom: 1rem;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
 `;
 
 export default IndexPage;
