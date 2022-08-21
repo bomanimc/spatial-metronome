@@ -17,6 +17,7 @@ function getRandomIntInclusive(min, max) {
 }
 
 const randomBPM = getRandomIntInclusive(40, 200);
+const randomPitch = getRandomIntInclusive(1, 200);
 
 const BACKGROUND_COLOR_OPTIONS = [
   `#ff3838`,
@@ -84,12 +85,12 @@ const IndexPage = () => {
     const loop = new Tone.Loop((time) => {
       colorIndexRef.current = (colorIndexRef.current + 1) % BACKGROUND_COLOR_OPTIONS.length;
       bgColorRef.current.style.background = BACKGROUND_COLOR_OPTIONS[colorIndexRef.current];
-      sampler.triggerAttackRelease("A1", "8n", time);  // 8n = duration of an 8th note
+      sampler.triggerAttackRelease(randomPitch, "8n", time);  // 8n = duration of an 8th note
     }, "4n" );
 
     const sampler = new Tone.Sampler({
       urls: {
-        A1: "snap.wav",
+        B1: "wood.wav",
       },
       baseUrl: "/sounds/",
       onload: () => {
